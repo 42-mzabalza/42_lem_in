@@ -23,13 +23,13 @@ char		*find_free_node(t_node *node)
 	return (NULL);
 }
 
-t_path	*init_path(char *start)
+t_path	*init_path(char *start_id)
 {
 	t_path 	*path;
 
 	if (!(path = (t_path*)malloc(sizeof(t_path))))
 		exit(-1);
-	path->id = start;
+	path->id = start_id;
 	path->total_cost = 0;
 	path->next = NULL;
 	path->prev = NULL;

@@ -32,7 +32,6 @@ typedef struct 		s_node
 	int 			*passed;
 	struct s_node	*next;
 	struct s_node	*prev;
-
 }					t_node;
 
 typedef struct 		s_glist
@@ -62,11 +61,12 @@ typedef struct  	s_path
 
 typedef struct 		s_dijk
 {
-	t_path			*path;
+	t_path			*path_head;
+	t_path			*path_tail;
 	int 			nb_moves;
-	struct s_dijk	next;
-	struct s_dijk	prev;
-
+	struct s_dijk	*d_head;
+	struct s_dijk	*next;
+	struct s_dijk	*prev;
 }					t_dijk;
 
 int 			main();
