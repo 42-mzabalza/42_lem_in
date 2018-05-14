@@ -54,7 +54,7 @@ typedef struct 		s_adjlist
 typedef struct  	s_path
 {
 	char			*id;
-	int 			total_cost;
+	int 			total_cost; //quitar
 	struct s_path	*next;
 	struct s_path	*prev;
 }					t_path;
@@ -63,8 +63,10 @@ typedef struct 		s_dijk
 {
 	t_path			*path_head;
 	t_path			*path_tail;
-	int 			nb_moves;
-	struct s_dijk	*d_head;
+	int 			nb_nodes;
+	t_glist 		*glist;
+	// struct s_dijk	*d_head;
+	// struct s_dijk	*d_tail;
 	struct s_dijk	*next;
 	struct s_dijk	*prev;
 }					t_dijk;
@@ -86,7 +88,7 @@ t_glist 		*pointer_2_glist(char *id_room, t_glist *tmp_glist);
 */
 
 t_path			*any_path(t_adjlist *alist);
-t_path 			*dijkstra_path(t_adjlist *alist);
+t_dijk 			*dijkstra_path(t_adjlist *alist);
 
 t_path			*add_node_2_path(char *id, t_path *path);
 char			*find_free_node(t_node *node);
@@ -99,6 +101,7 @@ t_path			*rm_node_from_path(t_path *path);
 
 void			show_path(t_path *path);
 void			show_nodes(t_node *node);
+void			show_global_paths(t_dijk *global);
 
 
 #endif

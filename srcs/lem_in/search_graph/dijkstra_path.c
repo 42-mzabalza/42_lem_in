@@ -12,53 +12,60 @@
 
 #include "lem_in.h"
 
-static t_dijk	*init_dijk()
-
-static t_dijk	*init_dijk(t_node *start)
+static t_dijk	*zero_dijk(char *id)
 {
-	int 	i;
-	t_path	*path;
+	t_dijk	*global;
+
+	if (!(global = (t_dijk*)malloc(sizeof(t_dijk))))
+			exit(-1);
+	global->prev = NULL;
+	global->next = NULL;
+	global->nb_nodes = 1;
+	global->path_head = init_path(id);
+	global->path_tail = global->path_head;
+	return (global);
+}
+
+static t_dijk	*init_dijk(t_node *start, t_dijk **global_head, t_adjlist *alist)
+{
 	t_dijk	*global;
 	char	*start_id;
 
 	start_id = start->id;
+	global = zero_dijk(start_id);
+	*global_head = global;
 	start = start->next;
-	i = 0;
-	(!(global = (t_dijk*)malloc(sizeof(t_dijk))))
-			exit(-1);
-	global->prev = NULL;
-	while(start)
+	if (start)
 	{
-		global->next = NULL;
-		global->path_head = init_path(start_id);
-		global->path_tail = add_node_2_path(global->path_head, path); //find free??
-		if (!i)
-		{
-			global->d_head = global;
-			i = 1;
-		}
-		start = start->next;
-		global = 
-		(!(global = (t_dijk*)malloc(sizeof(t_dijk))))
-			exit(-1);
+		global->path_tail = add_node_2_path(start->id, global->path_tail);
+		global->glist = pointer_2_glist(global->path_tail->id, alist->start);
+		*(global->glist->head->passed) = 1;
 	}
+	start = start->next;
+	while (start)
+	{
+		global->next = zero_dijk(start_id); 
+		global->next->prev = global;
+		global = global->next;
+		global->path_tail = add_node_2_path(start->id, global->path_tail); //find free??
+		global->glist = pointer_2_glist(global->path_tail->id, alist->start);
+		*(global->glist->head->passed) = 1;
+		global->nb_nodes++;
+		start = start->next;
+	}
+	return (global);
 }
 
-t_path 			*dijkstra_path(t_adjlist *alist)
+t_dijk			*dijkstra_path(t_adjlist *alist)
 {
-	t_path	*path;
-	t_glist *g_tmp;
 	t_dijk	*global;
 	t_dijk	*global_head;
 
-	global = init_dijk(alist->start->head);
-	g_tmp = alist->start;
-	path = init_path(g_tmp->head->id);
-	final_path = path;
-	if (!(g_tmp = pointer_2_glist(find_free_node(g_tmp->head), alist->start)))
+	global = init_dijk(alist->start->head, &global_head, alist);
+	while (global->glist->head->pos != 2)
 	{
-		ft_putstr("No path\n");
-		exit(-1);
+		global = find_shortest_path(global_head);
+		follow_shortest_path(global);
 	}
 	return (global_head);
 }

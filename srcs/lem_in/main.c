@@ -15,7 +15,8 @@
 int main()
 {
 	t_adjlist 	*adjlist;
-	t_path		*path;
+	// t_path		*path;
+	t_dijk		*global_paths;
 
 	adjlist = (t_adjlist *)malloc(sizeof(t_adjlist));
 	if (!get_data(adjlist))
@@ -25,8 +26,10 @@ int main()
 		//meter ft_error() en libft YA
 	}
 	//print_graph(adjlist);
-	path = any_path(adjlist);
-	show_path(path);
+	// path = any_path(adjlist);
+	global_paths = dijkstra_path(adjlist);
+	show_global_paths(global_paths);
+	// show_path(path);
 	// while (i < nb_nodes)
 	// {
 	// 	adjlist[i] = (t_list *)malloc(sizeof(t_list));

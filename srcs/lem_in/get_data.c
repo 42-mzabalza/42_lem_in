@@ -100,9 +100,8 @@ static void	get_node(char *line, t_adjlist *adjlist)
 
 int 			get_data(t_adjlist *adjlist)
 {
-	char 	*line;
-	// t_node	*node;
-	int i;
+	char	*line;
+	int 	i;
 
 	if (get_next_line(0, &line) > 0)
 	{
@@ -114,7 +113,7 @@ int 			get_data(t_adjlist *adjlist)
 		adjlist->nb_ant = ft_atoi(line);
 		free(line);
 	}
-	ft_putnbr(adjlist->nb_ant);
+	// ft_putnbr(adjlist->nb_ant);
 	while (get_next_line(0, &line) > 0 && (line_type(line, '-') == 0))
 	{
 		get_node(line, adjlist);
@@ -125,8 +124,6 @@ int 			get_data(t_adjlist *adjlist)
 	i = 0;
 	while (get_next_line(0, &line) > 0) //line_type
 	{
-		ft_putnbr(i++);
-		ft_putchar('\n');
 		add_connection(line, adjlist);
 		free(line);
 	}
