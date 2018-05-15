@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static t_dijk	*zero_dijk(char *id)
+t_dijk	*zero_dijk(char *id)
 {
 	t_dijk	*global;
 
@@ -39,6 +39,7 @@ static t_dijk	*init_dijk(t_node *start, t_dijk **global_head, t_adjlist *alist)
 	{
 		global->path_tail = add_node_2_path(start->id, global->path_tail);
 		global->glist = pointer_2_glist(global->path_tail->id, alist->start);
+		global->nb_nodes++;
 		*(global->glist->head->passed) = 1;
 	}
 	start = start->next;
@@ -62,10 +63,24 @@ t_dijk			*dijkstra_path(t_adjlist *alist)
 	t_dijk	*global_head;
 
 	global = init_dijk(alist->start->head, &global_head, alist);
+	//si el primero ya ha llegado al dos no me lo va a dar
 	while (global->glist->head->pos != 2)
 	{
-		global = find_shortest_path(global_head);
-		follow_shortest_path(global);
+		if (!(global = find_shortest_gpath(global_head)))
+		{
+			ft_putendl("no paths");
+			exit(1);
+		}
+		if (!(follow_shortest_path(global, alist)))
+		{
+			if (!remove_global(global, &global_head))
+			{
+				ft_putendl("no paths");
+				exit(1);
+			}
+		}
 	}
+	ft_putendl("______shortest path______");
+	show_path(global->path_head);
 	return (global_head);
 }

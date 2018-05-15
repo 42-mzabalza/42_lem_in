@@ -89,6 +89,10 @@ t_glist 		*pointer_2_glist(char *id_room, t_glist *tmp_glist);
 
 t_path			*any_path(t_adjlist *alist);
 t_dijk 			*dijkstra_path(t_adjlist *alist);
+t_dijk			*zero_dijk(char *id);
+t_dijk			*find_shortest_gpath(t_dijk *global_paths);
+int				follow_shortest_path(t_dijk *global, t_adjlist *alist);
+t_dijk			*remove_global(t_dijk *global, t_dijk **global_head);
 
 t_path			*add_node_2_path(char *id, t_path *path);
 char			*find_free_node(t_node *node);
@@ -102,6 +106,7 @@ t_path			*rm_node_from_path(t_path *path);
 void			show_path(t_path *path);
 void			show_nodes(t_node *node);
 void			show_global_paths(t_dijk *global);
+
 
 
 #endif

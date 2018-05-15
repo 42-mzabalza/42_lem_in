@@ -18,7 +18,8 @@ LEM_SRC = srcs/lem_in/main.c\
 	srcs/lem_in/goto_alist.c\
 	srcs/lem_in/show_path.c\
 	srcs/lem_in/search_graph/any_path.c\
-	srcs/lem_in/search_graph/dijkstra_path.c
+	srcs/lem_in/search_graph/dijkstra_path.c\
+	srcs/lem_in/search_graph/find_shortest_gpath.c
 
 
 LEM_OBJ = $(LEM_SRC:.c=.o)
