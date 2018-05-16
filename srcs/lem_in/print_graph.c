@@ -23,9 +23,7 @@ static void	print_list(t_glist *list)
 			tmp->pos == 1 ? ft_putstr("\n##start\n") : ft_putstr("##end\n");
 		ft_putstr(tmp->id);
 		ft_putchar(' ');
-		ft_putnbr(tmp->x);
-		ft_putchar(' ');
-		ft_putnbr(tmp->y);
+		ft_putnbr(*(tmp->passed));
 		if (tmp->next)
 			ft_putstr(" -> ");
 		tmp = tmp->next;

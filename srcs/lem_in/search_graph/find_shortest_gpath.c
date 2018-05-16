@@ -103,7 +103,7 @@ t_dijk	*find_shortest_gpath(t_dijk *global_head)
 	t_dijk	*shortest_gpath;
 
 	if (!global_head)
-		return(NULL);
+		return (NULL);
 	shortest_gpath = global_head;
 	while (global_head)
 	{
