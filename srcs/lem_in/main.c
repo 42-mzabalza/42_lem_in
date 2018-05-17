@@ -16,7 +16,8 @@ int main()
 {
 	t_adjlist 	*adjlist;
 	// t_path		*path;
-	t_dijk		*global_paths;
+	// t_dijk		*global_paths;
+	t_prev		*prev_list;
 
 	adjlist = (t_adjlist *)malloc(sizeof(t_adjlist));
 	if (!get_data(adjlist))
@@ -26,9 +27,10 @@ int main()
 		//meter ft_error() en libft YA
 	}
 	// print_graph(adjlist);
-	global_paths = dijkstra_path(adjlist);
+	// global_paths = dijkstra_path(adjlist);
 	// show_global_paths(global_paths);
 	// // path = any_path(adjlist);
+	prev_list = breath_first_search(adjlist->start);
 	// // show_path(path);
 
 	// print_graph(adjlist);

@@ -2,10 +2,8 @@ LEM_NAME = lem-in
 
 VISU_NAME = visu-hex
 
-
 FLAGS = -Wall -Werror -Wextra
 
-#revisar en 42 proyecto push_swap
 CC = gcc -Iincludes
 
 LIBFT = libft/libft.a
@@ -19,8 +17,10 @@ LEM_SRC = srcs/lem_in/main.c\
 	srcs/lem_in/show_path.c\
 	srcs/lem_in/search_graph/any_path.c\
 	srcs/lem_in/search_graph/dijkstra_path.c\
-	srcs/lem_in/search_graph/find_shortest_gpath.c
-
+	srcs/lem_in/search_graph/find_shortest_gpath.c\
+	srcs/lem_in/find_start.c\
+	srcs/lem_in/search_graph/add_2_stack.c\
+	srcs/lem_in/search_graph/breath_first_search.c
 
 LEM_OBJ = $(LEM_SRC:.c=.o)
 
@@ -30,7 +30,6 @@ VISU_SRC = srcs/visualizer/main.c\
 	srcs/lem_in/print_graph.c\
 	srcs/lem_in/get_next_line.c\
 	srcs/lem_in/goto_alist.c\
-
 
 VISU_OBJ = $(VISU_SRC:.c=.o)
 

@@ -113,7 +113,7 @@ int 			get_data(t_adjlist *adjlist)
 		adjlist->nb_ant = ft_atoi(line);
 		free(line);
 	}
-	ft_putnbr(adjlist->nb_ant);
+	// ft_putnbr(adjlist->nb_ant);
 	while (get_next_line(0, &line) > 0 && (line_type(line, '-') == 0))
 	{
 		get_node(line, adjlist);

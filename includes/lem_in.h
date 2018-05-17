@@ -71,6 +71,20 @@ typedef struct 		s_dijk
 	struct s_dijk	*prev;
 }					t_dijk;
 
+typedef struct 		s_prev
+{
+	char			*current;
+	char			*previous;
+	struct s_prev	*next;
+	struct s_prev	*prev;
+}					t_prev;
+
+typedef struct 		s_stack
+{
+	t_glist			*glist;
+	struct s_stack	*next;
+}					t_stack;
+
 int 			main();
 int 			get_data(t_adjlist *adjlist);
 void			add_glist(t_node *node, t_adjlist *alist);
@@ -82,6 +96,7 @@ int				add_connection(char *line, t_adjlist *alist);
 void			add_node(char *room, t_glist *list, t_adjlist *alist);
 int				goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist);
 t_glist 		*pointer_2_glist(char *id_room, t_glist *tmp_glist);
+t_glist			*find_start(t_glist *glist);
 
 /*
 **----------GRAPH SEARCH ALGO--------------------------------------------------
@@ -93,6 +108,11 @@ t_dijk			*zero_dijk(char *id);
 t_dijk			*find_shortest_gpath(t_dijk *global_paths);
 int				follow_shortest_path(t_dijk *global, t_adjlist *alist);
 t_dijk			*remove_global(t_dijk *global, t_dijk **global_head);
+
+t_prev			*breath_first_search(t_glist *glist_start);
+void			add_2_stack(t_stack **queue_tail, t_glist *glist);
+void			rm_from_stack(t_stack **queue_head);
+void 			add_2_prev(t_prev **prev, char *current, char *previous);
 
 t_path			*add_node_2_path(char *id, t_path *path);
 char			*find_free_node(t_node *node);
@@ -106,6 +126,7 @@ t_path			*rm_node_from_path(t_path *path);
 void			show_path(t_path *path);
 void			show_nodes(t_node *node);
 void			show_global_paths(t_dijk *global);
+void			show_prev_list(t_prev *prev_list);
 
 
 

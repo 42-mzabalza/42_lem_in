@@ -61,13 +61,15 @@ t_dijk			*dijkstra_path(t_adjlist *alist)
 {
 	t_dijk	*global;
 	t_dijk	*global_head;
+	t_glist	*start;
 	// int i = 5000000;
-
-	global = init_dijk(alist->start->head, &global_head, alist);
+	//ME FALTA BUSCAR EL START!!!
+	start = find_start(alist->start);
+	global = init_dijk(start->head, &global_head, alist);
 	//si el primero ya ha llegado al dos no me lo va a dar
 	// while (global->glist->head->pos != 2)
-	show_global_paths(global_head);
-	ft_putendl("_________________________________________");
+	// show_global_paths(global_head);
+	// ft_putendl("_________________________________________");
 	// while (i--)
 	while (global->glist->head->pos != 2)
 	{
@@ -85,10 +87,10 @@ t_dijk			*dijkstra_path(t_adjlist *alist)
 			}
 		}
 	}
-	show_global_paths(global_head);
-	ft_putendl("_________________________________________");
-	// ft_putendl("______shortest path______");
-	// show_path(global->path_head);
-	// ft_putendl("_________________________");
+	// show_global_paths(global_head);
+	// ft_putendl("_________________________________________");
+	ft_putendl("______shortest path______");
+	show_path(global->path_head);
+	ft_putendl("_________________________");
 	return (global_head);
 }

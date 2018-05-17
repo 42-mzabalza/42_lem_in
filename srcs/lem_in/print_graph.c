@@ -38,6 +38,7 @@ void		print_graph(t_adjlist *adjlist)
 	ft_putchar('\n');
 	ft_putstr("\nnumber of nodes: ");
 	ft_putnbr(adjlist->nb_room);
+	ft_putchar('\n');
 	tmp = adjlist->start;
 	while (tmp)
 	{
