@@ -17,7 +17,6 @@ static	t_path	**realloc_allpaths(t_path **all_paths, int i)
 	int 	j;
 	t_path 	**tmp_path;
 
-	//FREE
 	tmp_path = all_paths;
 	all_paths = (t_path **)malloc(sizeof(t_path *) * (i + 2));
 	all_paths[i] = NULL;
@@ -36,7 +35,6 @@ int main()
 	t_adjlist 	*adjlist;
 	t_path		*path;
 	t_path 		**all_paths;
-	// t_dijk		*global_paths;
 	t_prev		*prev_list;
 	int 		i;
 	int			j;
@@ -56,10 +54,7 @@ int main()
 	path = create_path(prev_list);
 	all_paths = (t_path **)malloc(sizeof(t_path *) * 2);
 	all_paths[1] = NULL;
-	// path_head = path;
 	*all_paths = path;
-	// reset_map(adjlist->start, all_paths);
-
 	i = 1;
 	while(1)
 	{

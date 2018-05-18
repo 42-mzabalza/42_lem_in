@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static int 	is_in_path(char *id_room, t_path **path)
+static int 		is_in_path(char *id_room, t_path **path)
 {
 	t_path *tmp;
 	int i;
