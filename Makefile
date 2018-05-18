@@ -19,8 +19,11 @@ LEM_SRC = srcs/lem_in/main.c\
 	srcs/lem_in/search_graph/dijkstra_path.c\
 	srcs/lem_in/search_graph/find_shortest_gpath.c\
 	srcs/lem_in/find_start.c\
-	srcs/lem_in/search_graph/add_2_stack.c\
-	srcs/lem_in/search_graph/breath_first_search.c
+	srcs/lem_in/search_graph/add_2_queue.c\
+	srcs/lem_in/search_graph/breath_first_search.c\
+	srcs/lem_in/search_graph/show_queue.c\
+	srcs/lem_in/search_graph/create_path.c\
+	srcs/lem_in/search_graph/reset_map.c
 
 LEM_OBJ = $(LEM_SRC:.c=.o)
 

@@ -25,20 +25,25 @@ void 	add_2_prev(t_prev **prev, char *current, char *previous)
 	*prev = prev_node;
 }
 
-void	rm_from_stack(t_stack **queue_head)
+int	rm_from_queue(t_stack **queue_head)
 {
 	t_stack *tmp;
-
+	
 	tmp = *queue_head;
 	*queue_head = (*queue_head)->next;
+	if (!(*queue_head))
+		return (0);
 	// free(tmp);
+	return (1);
 }
+	
 
-void	add_2_stack(t_stack **queue_tail, t_glist *glist)
+void	add_2_queue(t_stack **queue_tail, t_glist *glist)
 {
 	t_stack *new_node;
 
 	new_node = (t_stack *)malloc(sizeof(t_stack));
+	*(glist->head->passed) = 1;
 	new_node->glist = glist;
 	new_node->next = NULL;
 	(*queue_tail)->next = new_node;

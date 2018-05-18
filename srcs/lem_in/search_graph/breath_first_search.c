@@ -12,25 +12,26 @@
 
 #include "lem_in.h"
 
-static void		explore_neigh(t_stack **q_head, t_stack **q_tail, t_prev **prev, t_glist *glist_start)
+static int		explore_neigh(t_stack **q_head, t_stack **q_tail, t_prev **prev, t_glist *glist_start)
 {
 	t_node *neighbors;
-	int i = 0;
 
 	neighbors = (*q_head)->glist->head->next;
-	show_nodes(neighbors);
+	// show_nodes(neighbors);
 	while (neighbors)
 	{
 		if (!(*(neighbors->passed)))
 		{
-			ft_putnbr(i++);
-			add_2_stack(q_tail, pointer_2_glist(neighbors->id, glist_start));
+			add_2_queue(q_tail, pointer_2_glist(neighbors->id, glist_start));
 			add_2_prev(prev, neighbors->id, (*q_head)->glist->head->id);
+			if ((*q_tail)->glist->head->pos == 2)
+				return (1);
 		}
 		neighbors = neighbors->next;
 	}
-	ft_putchar('\n');
-	rm_from_stack(q_head);
+	if (!rm_from_queue(q_head))
+		return (-1);
+	return (0);
 }
 
 static t_stack	*init_queue(t_glist *glist)
@@ -60,17 +61,24 @@ t_prev			*breath_first_search(t_glist *glist_start)
 	t_stack		*queue_head;
 	t_stack		*queue_tail;
 	t_prev		*previous;
-	int i = 4;
+	int 		rtn;
+	// int i = 4;
 
 	previous = init_previous(find_start(glist_start));
 	queue_tail = init_queue(find_start(glist_start));
 	queue_head = queue_tail;
 	// show_prev_list(previous);
-	// while (queue_head->glist->head->pos != 2)
-	while(i--)
+	while (queue_head->glist->head->pos != 2)
+	// while(i--)
 	{
-		explore_neigh(&queue_head, &queue_tail, &previous, glist_start);
-		show_prev_list(previous);
+		rtn = explore_neigh(&queue_head, &queue_tail, &previous, glist_start);
+		if (rtn == 1)
+			return (previous);
+		else if (rtn == -1)
+			return(NULL);
+		// show_prev_list(previous);
+		// show_queue(queue_head);
 	}
+	// show_prev_list(previous);//
 	return (previous);
 }

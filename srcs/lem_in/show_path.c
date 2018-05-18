@@ -12,31 +12,6 @@
 
 #include "lem_in.h"
 
-static t_prev	*find_previous(char *id, t_prev *tail)
-{
-	if (!id)
-		return (NULL);
-	while (tail)
-	{
-		if (!ft_strcmp(tail->current, id))
-			return (tail);
-		tail = tail->prev;
-	}
-	return (NULL);
-}
-
-void			show_prev_list(t_prev *prev_list)
-{
-	t_prev	*tail;
-
-	tail = prev_list;
-	while(prev_list)
-	{
-		ft_putendl(prev_list->current);
-		prev_list = find_previous(prev_list->previous, tail);
-	}
-}
-
 void			show_global_paths(t_dijk *global)
 {
 	while(global)
