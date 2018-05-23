@@ -12,20 +12,6 @@
 
 #include "lem_in.h"
 
-void			show_global_paths(t_dijk *global)
-{
-	while(global)
-	{
-		ft_putstr("Current node: ");
-		ft_putendl(global->glist->head->id);
-		ft_putstr("path nodes: ");
-		ft_putnbr(global->nb_nodes);
-		ft_putchar('\n');
-		show_path(global->path_head);
-		global = global->next;
-	}
-}
-
 void			show_nodes(t_node *node)
 {
 	int i;

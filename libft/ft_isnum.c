@@ -17,10 +17,11 @@ int		ft_isnum(char *str)
 	i = 0;
 	if (str == NULL)
 		return (0);
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		neg = 1;
 		i++;
+		if (str[i] == '-')
+		neg = 1;
 	}
 	while(str[i])
 	{

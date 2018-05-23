@@ -25,6 +25,8 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+size_t				ft_nb_words(char const *s, char c);
+int					ft_str_error(char *str, int rtn_value);
 long				ft_abs(long nb);
 int					*ft_range(int min, int max);
 void				ft_swap(int *a, int *b);
