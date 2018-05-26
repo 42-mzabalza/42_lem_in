@@ -66,6 +66,8 @@ t_prev			*breath_first_search(t_glist *glist_start)
 	previous = init_previous(find_start(glist_start));
 	queue_tail = init_queue(find_start(glist_start));
 	queue_head = queue_tail;
+	// show_queue(queue_head);
+	// show_prev_list(previous);
 	while (queue_head->glist->head->pos != 2)
 	{
 		rtn = explore_neigh(&queue_head, &queue_tail, &previous, glist_start);

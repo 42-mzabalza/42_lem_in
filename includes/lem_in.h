@@ -33,6 +33,7 @@ typedef struct 		s_node
 	struct s_node	*prev;
 }					t_node;
 
+
 typedef struct 		s_glist
 {
 	t_node			*head;
@@ -53,7 +54,7 @@ typedef struct 		s_adjlist
 typedef struct  	s_path
 {
 	char			*id;
-	int 			total_cost; //quitar
+	int 			ant; //quitar
 	struct s_path	*next;
 	struct s_path	*prev;
 }					t_path;
@@ -62,8 +63,9 @@ typedef struct  	s_gpath
 {
 	t_path			*path_head;
 	int 			nb_nodes; //quitar
-	struct s_path	*next;
-	struct s_path	*prev;
+	int 			nb_ants;
+	struct s_gpath	*next;
+	struct s_gpath	*prev;
 }					t_gpath;
 
 
@@ -93,7 +95,7 @@ int 			get_data(t_adjlist *adjlist);
 int				get_nb_ants();
 int				line_type(char *line, char c);
 int				get_nb_ants();
-void			skip_comment(char *line);
+void			skip_comment(char **line);
 int 			is_integer(char *str);
 t_adjlist		*init_adjlist();
 t_node 			*init_node();
@@ -111,12 +113,13 @@ int				rm_from_queue(t_stack **queue_head);
 void 			add_2_prev(t_prev **prev, char *current, char *previous);
 t_prev			*find_previous(char *id, t_prev *tail);
 t_path			*create_path(t_prev *reverse_path);
-void			reset_map(t_glist *glist_start, t_path **path);
+// void			reset_map(t_glist *glist_start, t_path **path);
+void			reset_map(t_glist *glist_start, t_gpath *gpath);
 t_path			*add_node_2_path(char *id, t_path *path);
 char			*find_free_node(t_node *node);
 t_path			*init_path(char *start);
 t_path			*rm_node_from_path(t_path *path);
-
+void 			add_2_gpath(t_gpath *gpath, t_path *path);
 /*
 **----------  SHOW   --------------------------------------------------
 */
@@ -126,7 +129,8 @@ void			show_path(t_path *path);
 void			show_nodes(t_node *node);
 void			show_prev_list(t_prev *prev_list);
 void			show_queue(t_stack *queue_head);
-void			show_answer(t_path **all_paths, t_adjlist *alist, int nb_path);
+void			show_answer(t_adjlist *alist, t_gpath *gpath);
+void			show_gpaths(t_gpath *gpath);
 
 
 

@@ -12,16 +12,11 @@
 
 #include "lem_in.h"
 
-void	skip_comment(char *line)
+void	skip_comment(char **line)
 {
-	// while (line[0] == '#' && line[1] != '#')
-	while (line[0] == '#')
+	while ((*line)[0] == '#')
 	{
-		ft_putendl(line);
-		free(line);
-		ft_putchar('x');
-		get_next_line(0, &line);
-		ft_putendl(line);
+		free(*line);
+		get_next_line(0, &(*line));
 	}
-	ft_putendl(line);
 }

@@ -33,9 +33,9 @@ static void	print_list(t_glist *list)
 void		print_graph(t_adjlist *adjlist)
 {
 	t_glist *tmp;
-
+	ft_putendl("----map----");
+	ft_putstr("number of ants: ");
 	ft_putnbr(adjlist->nb_ant);
-	ft_putchar('\n');
 	ft_putstr("\nnumber of nodes: ");
 	ft_putnbr(adjlist->nb_room);
 	ft_putchar('\n');
@@ -46,4 +46,5 @@ void		print_graph(t_adjlist *adjlist)
 		ft_putchar('\n');
 		tmp = tmp->next;
 	}
+	ft_putendl("----finished map----");
 }

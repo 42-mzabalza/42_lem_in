@@ -17,34 +17,27 @@ void		show_ant(int ant_nb, t_path *path)
 
 }
 
-void		show_answer(t_path **all_paths, t_adjlist *alist, int nb_path)
+static int	nb_path_needed(t_adjlist *alist, t_gpath *gpath)
 {
-	char **ans_matrix;
-	int ant_nb;
-	int nb_moves;
-	t_path *path;
-	int nb_ants;
 	int i;
-	int j;
+	int moves;
 
-	ans_matrix = (char **)malloc(sizeof(char *));
-	nb_ants = alist->nb_ant;
-	path = all_paths[0];
-	ant_nb = 1;
+	gpath->nb_ants = alist->nb_ant;
+	moves = gpath->nb_ants + (gpath->nb_nodes - 2);
 	i = 1;
-	j = 0;
-	while(nb_ants)
+	gpath = gpath->next;
+	while(gpath && moves > (gpath->nb_nodes - 1))
 	{
-		path = all_paths[0];
-		while (j < i && path)
-		{
-			show_ant(ant_nb + i, path);
-			path = path->next;
-			j++;
-		}
-		if (i < alist->nb_ant)
-			i++;
-		nb_ants--;
-		path = path->next;
+		i++;
+		moves = (moves + (gpath->nb_nodes - 1)) / 2;
+		gpath = gpath->next;
 	}
+	return (moves);
+}
+
+void		show_answer(t_adjlist *alist, t_gpath *gpath)
+{
+	ft_putstr("number of moves: ");
+	ft_putnbr(nb_path_needed(alist, gpath));
+	ft_putchar('\n');
 }

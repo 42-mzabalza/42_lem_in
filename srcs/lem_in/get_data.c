@@ -72,6 +72,7 @@ static int	get_node(char *line, t_adjlist *adjlist)
 	t_node 	*node;
 	int flag;
 
+	// ft_putendl(line);
 	flag = 0;
 	node = init_node();
 	if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
@@ -89,14 +90,12 @@ static int	get_node(char *line, t_adjlist *adjlist)
 	}
 	// if (line[0] == '#' && line[1] != '#' && !flag)
 	if (line[0] == '#' && !flag)
+	
 		return (1);
 	else
-		skip_comment(line);
-	ft_putchar('z');
-	ft_putendl(line);
+		skip_comment(&line);
 	if (line && line_type(line, ' ') == 2)
 	{
-		ft_putendl(line);
 		if (!get_room(node, line))
 			return (0);
 	}

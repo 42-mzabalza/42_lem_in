@@ -12,31 +12,29 @@
 
 #include "lem_in.h"
 
-static int 		is_in_path(char *id_room, t_path **path)
+static int 		is_in_path(char *id_room, t_gpath *gpath)
 {
 	t_path *tmp;
-	int i;
 
-	i = 0;
-	while(path[i])
+	while(gpath)
 	{
-		tmp = path[i];
+		tmp = gpath->path_head;
 		while (tmp)
 		{
 			if (!ft_strcmp(tmp->id, id_room)) //mirar mi ft_strcmp!!!!
 				return (1);
 			tmp = tmp->next;
 		}
-		i++;
+		gpath = gpath->next;
 	}
 	return (0);
 }
 
-void			reset_map(t_glist *glist_start, t_path **path)
+void			reset_map(t_glist *glist_start, t_gpath *gpath)
 {
 	while (glist_start)
 	{
-		if (!is_in_path(glist_start->head->id, path))
+		if (!is_in_path(glist_start->head->id, gpath))
 			*(glist_start->head->passed) = 0;
 		if (glist_start->head->pos == 2)
 			*(glist_start->head->passed) = 0;

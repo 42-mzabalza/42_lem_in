@@ -32,12 +32,24 @@ void			show_nodes(t_node *node)
 	ft_putendl("******");
 }
 
+void			show_gpaths(t_gpath *gpath)
+{
+	while(gpath)
+	{
+		ft_putstr("nb of nodes: ");
+		ft_putnbr(gpath->nb_nodes);
+		ft_putchar('\n');
+		show_path(gpath->path_head);
+		gpath = gpath->next;
+	}
+}
+
 void			show_path(t_path *path)
 {
 	ft_putendl("------");
 	while(path)
 	{
-		ft_putnbr(path->total_cost);
+		ft_putnbr(path->ant);
 		ft_putchar(' ');
 		ft_putendl(path->id);
 		path = path->next;
