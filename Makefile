@@ -40,7 +40,8 @@ LEM_SRC = srcs/lem_in/main.c\
 	srcs/lem_in/show_answer.c\
 	srcs/lem_in/get_nb_ants.c\
 	srcs/lem_in/skip_comment.c\
-	srcs/lem_in/is_integer.c
+	srcs/lem_in/is_integer.c\
+	srcs/lem_in/solution_format.c
 
 LEM_OBJ = $(LEM_SRC:.c=.o)
 

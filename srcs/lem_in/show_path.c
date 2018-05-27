@@ -38,6 +38,8 @@ void			show_gpaths(t_gpath *gpath)
 	{
 		ft_putstr("nb of nodes: ");
 		ft_putnbr(gpath->nb_nodes);
+		ft_putstr("nb of ants: ");
+		ft_putnbr(gpath->nb_ants);
 		ft_putchar('\n');
 		show_path(gpath->path_head);
 		gpath = gpath->next;

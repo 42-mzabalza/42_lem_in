@@ -131,6 +131,7 @@ void			show_prev_list(t_prev *prev_list);
 void			show_queue(t_stack *queue_head);
 void			show_answer(t_adjlist *alist, t_gpath *gpath);
 void			show_gpaths(t_gpath *gpath);
+void 			solution_format(t_gpath *gpath, int moves, int nb_ants);
 
 
 

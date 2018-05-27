@@ -67,7 +67,7 @@ int 				main()
 		path = create_path(prev_list);
 		add_2_gpath(gpath, path);
 	}
-	show_gpaths(gpath);
+	// show_gpaths(gpath);
 	show_answer(adjlist, gpath);
 	return (0);
 }
