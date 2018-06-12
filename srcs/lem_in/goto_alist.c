@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   goto_alist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mzabalza <mzabalza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 13:14:39 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/04/19 13:14:42 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/12 13:58:43 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist)
 	i = 0;
 	while (tmp_list)
 	{
-		if (!ft_strcmp(tmp_list->head->id, tab0)) //mirar mi ft_strcmp!!!!
+		if (!ft_strcmp(tmp_list->head->id, tab0))
 		{
 			i++;
 			break ;
@@ -53,7 +53,9 @@ int			goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist)
 	}
 	if (!i)
 		return (0);
-	add_node(tab1, tmp_list, alist);
+	// if (pointer_2_glist(tab1, )) si lo 
+	if (!add_node(tab1, tmp_list, alist))
+		return (0);
 	return (1);
 }
 
@@ -62,15 +64,20 @@ int			goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist)
 **Adding lists to the Adjacency list
 */
 
-void		add_node(char *room, t_glist *glist, t_adjlist *alist)
+int		add_node(char *room, t_glist *glist, t_adjlist *alist)
 {
 	t_node	*node;
 	t_glist *tmp_glist;
 
+	if (!(tmp_glist = pointer_2_glist(room, alist->start)))
+		return (0);
 	node = init_node();
-	if (!(node->id = ft_strdup(room)))
-		exit (1);
-	tmp_glist = pointer_2_glist(room, alist->start);
+	free(node->passed);
+	free(node->occupied);
+	// if (!(node->id = ft_strdup(room)))
+		// exit (1);
+	node->id = ft_strdup(room); //podria pasarle el puntero de tmp_glist->head->id
+	// tmp_glist = pointer_2_glist(room, alist->start);
 	node->passed = tmp_glist->head->passed;
 	node->occupied = tmp_glist->head->occupied;
 	node->x = tmp_glist->head->x;
@@ -79,4 +86,5 @@ void		add_node(char *room, t_glist *glist, t_adjlist *alist)
 	node->prev = glist->tail;
 	glist->tail->next = node;
 	glist->tail = node;
+	return (1);
 }

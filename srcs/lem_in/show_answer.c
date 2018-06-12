@@ -81,7 +81,6 @@ static int	nb_path_needed(t_adjlist *alist, t_gpath *gpath)
 	{
 		i++;
 		rem = (moves + (gpath->nb_nodes - 2)) % i;
-		// moves = (moves + (gpath->nb_nodes - 2)) / i;
 		rem = (sum_nodes(i, gpath_head) + alist->nb_ant) % i;
 		moves = (sum_nodes(i, gpath_head) + alist->nb_ant) / i;
 		if (rem)
@@ -89,9 +88,9 @@ static int	nb_path_needed(t_adjlist *alist, t_gpath *gpath)
 		distribute_ants(i, alist->nb_ant, gpath_head);
 		gpath = gpath->next;
 	}
-	ft_putstr("number of moves: ");
-	ft_putnbr(moves);
-	ft_putchar('\n');
+	// ft_putstr("number of moves: ");
+	// ft_putnbr(moves);
+	// ft_putchar('\n');
 	return (moves);
 }
 
@@ -100,17 +99,16 @@ void		show_answer(t_adjlist *alist, t_gpath *gpath)
 	t_gpath *gpath_head;
 	int 	moves;
 
-	// show_gpaths(gpath_head);
 	gpath_head = gpath;
 	moves = nb_path_needed(alist, gpath);
-	while(gpath)
-	{
-		ft_putstr("number of ants: ");
-		ft_putnbr(gpath->nb_ants);
-		ft_putchar('\n');
-		gpath = gpath->next;
-	}
+	// while(gpath)
+	// {
+	// 	ft_putstr("number of ants: ");
+	// 	ft_putnbr(gpath->nb_ants);
+	// 	ft_putchar('\n');
+	// 	gpath = gpath->next;
+	// }
 	reset_gpaths(gpath_head);
-	show_gpaths(gpath_head);
+	// show_gpaths(gpath_head);
 	solution_format(gpath_head, moves, alist->nb_ant);
 }

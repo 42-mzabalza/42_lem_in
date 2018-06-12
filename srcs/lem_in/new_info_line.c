@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_nb_ants.c                                      :+:      :+:    :+:   */
+/*   new_info_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/23 14:56:47 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/05/23 14:56:49 by mzabalza         ###   ########.fr       */
+/*   Created: 2018/06/12 15:58:11 by mzabalza          #+#    #+#             */
+/*   Updated: 2018/06/12 15:58:14 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			get_nb_ants(t_adjlist *adjlist)
+char 	*new_info_line(char *info, char *line)
 {
-	char	*line;
-	int 	i;
-	int		nb_ants;
+	char *tmp;
 
-	if (get_next_line(0, &line) > 0)
-	{
-		adjlist->info = ft_strdup(line);
-		if (ft_isnum(line) != 1)
-		{
-			free(line);
-			return (0);
-		}
-		nb_ants = ft_atoi(line);
-		free(line);
-	}
-	return (nb_ants);
+	tmp = info;
+	info = ft_strjoin(info, "\n");
+	free(tmp);
+	tmp = info;
+	info = ft_strjoin(info, line);
+	free(tmp);
+	return (info);
 }
+

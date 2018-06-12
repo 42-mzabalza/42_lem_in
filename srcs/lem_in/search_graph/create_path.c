@@ -34,7 +34,8 @@ t_path		*create_path(t_prev *reverse_path)
 		path = path->prev;
 		path->ant = (path->next->ant) + 1;
 		path->id = reverse_path->current;
-		reverse_path = find_previous(reverse_path->previous, tail);
-	}
+		reverse_path = find_previous(reverse_path->previous, tail); //si empiezo a buscar desde donde estoy mejor
+	}	
+	free_prev_list(tail);
 	return (path);
 }

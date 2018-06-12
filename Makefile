@@ -18,7 +18,7 @@ VISU_NAME = visu-hex
 LIBFT = libft/libft.a
 
 CC = clang $(INCLUDES)
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 
 
 INCLUDES = -Iincludes
@@ -41,27 +41,29 @@ LEM_SRC = srcs/lem_in/main.c\
 	srcs/lem_in/get_nb_ants.c\
 	srcs/lem_in/skip_comment.c\
 	srcs/lem_in/is_integer.c\
-	srcs/lem_in/solution_format.c
+	srcs/lem_in/solution_format.c\
+	srcs/lem_in/ft_free.c\
+	srcs/lem_in/new_info_line.c
 
 LEM_OBJ = $(LEM_SRC:.c=.o)
 
-VISU_SRC = srcs/visualizer/main.c\
-	srcs/lem_in/get_data.c\
-	srcs/lem_in/add_glist.c\
-	srcs/lem_in/print_graph.c\
-	srcs/lem_in/get_next_line.c\
-	srcs/lem_in/goto_alist.c\
-	srcs/lem_in/get_nb_ants.c\
-	srcs/lem_in/skip_comment.c\
-	srcs/lem_in/is_integer.c
+# VISU_SRC = srcs/visualizer/main.c\
+# 	srcs/lem_in/get_data.c\
+# 	srcs/lem_in/add_glist.c\
+# 	srcs/lem_in/print_graph.c\
+# 	srcs/lem_in/get_next_line.c\
+# 	srcs/lem_in/goto_alist.c\
+# 	srcs/lem_in/get_nb_ants.c\
+# 	srcs/lem_in/skip_comment.c\
+# 	srcs/lem_in/is_integer.c
 
-VISU_OBJ = $(VISU_SRC:.c=.o)
+# VISU_OBJ = $(VISU_SRC:.c=.o)
 
 HEADER = includes/lem_in.h
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(LEM_NAME) $(VISU_NAME)
+$(NAME): $(LIBFT) $(LEM_NAME)
 
 $(LIBFT):
 	make -C libft
@@ -70,9 +72,9 @@ $(LEM_NAME): $(LEM_OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(LEM_OBJ) $(LIBFT) -o $(LEM_NAME)
 	@printf '\033[32m[ ✔ ] %s\n\033[0m' "graph compiled!"
 
-$(VISU_NAME): $(VISU_OBJ)
-	$(CC) $(FLAGS) $(VISU_OBJ) $(LIBFT) -o $(VISU_NAME)
-	@printf '\033[32m[ ✔ ] %s\n\033[0m' "graph compiled!"
+# $(VISU_NAME): $(VISU_OBJ)
+# 	$(CC) $(FLAGS) $(VISU_OBJ) $(LIBFT) -o $(VISU_NAME)
+# 	@printf '\033[32m[ ✔ ] %s\n\033[0m' "graph compiled!"
 
 $(LEM_OBJ) : $(HEADER)
 

@@ -46,9 +46,9 @@ int	rm_from_queue(t_stack **queue_head)
 	
 	tmp = *queue_head;
 	*queue_head = (*queue_head)->next;
+	free(tmp);	
 	if (!(*queue_head))
 		return (0);
-	// free(tmp);
 	return (1);
 }
 	

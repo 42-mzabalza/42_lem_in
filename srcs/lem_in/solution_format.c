@@ -10,33 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lem_in.h"
-
-// static void	show_ant_move2(t_gpath *gpath)
-// {
-// 	t_path *path_tmp;
-
-// 	while(gpath)
-// 	{
-// 		path_tmp = gpath->path_head->next;
-// 		while(path_tmp) //while(path_tmp->ant)
-// 		{
-// 			if(path_tmp->ant)
-// 			{
-// 				ft_putchar('L');
-// 				ft_putnbr(path_tmp->ant);
-// 				ft_putchar('-');
-// 				ft_putstr(path_tmp->id);
-// 				ft_putchar(' ');
-// 			}
-// 			else
-// 				break;
-// 			path_tmp = path_tmp->next;
-// 		}
-// 		gpath = gpath->next;
-// 	}
-// }
 
 static int	run_ants(int nb_ants, t_path *path)
 {
@@ -44,27 +18,20 @@ static int	run_ants(int nb_ants, t_path *path)
 
 
 	i = 1;
-	// show_path(path);
 	while(path && !(path->ant))
-	{
-		// ft_putnbr(i++);
 		path = path->next;
-	}
-	// ft_putchar('i');
 	if (!path || !path->next)
 	{
 		if (nb_ants)
 			return (1);
 		return (0);
 	}
-	// ft_putchar('k');
 	while(path)
 	{
 		if (!(path->next->next) || path->next->ant == 0)
 			break;
 		path = path->next;
 	}
-	// ft_putchar('e');
 	while(path->ant)
 	{
 		path->next->ant = path->ant;
@@ -79,7 +46,9 @@ static void	show_ant_move(t_gpath *gpath)
 	t_path *path_tmp;
 
 	path_tmp = gpath->path_head->next;
-	while(path_tmp) //while(path_tmp->ant)
+	while(path_tmp->next)
+		path_tmp = path_tmp->next;
+	while(path_tmp)
 	{
 		if(path_tmp->ant)
 		{
@@ -89,9 +58,7 @@ static void	show_ant_move(t_gpath *gpath)
 			ft_putstr(path_tmp->id);
 			ft_putchar(' ');
 		}
-		// else
-		// 	break;
-		path_tmp = path_tmp->next;
+		path_tmp = path_tmp->prev;
 	}
 }
 
@@ -106,16 +73,14 @@ void 		solution_format(t_gpath *gpath, int moves, int nb_ants)
 	gpath_head = gpath;
 	while(j <= moves)
 	{
-		ft_putnbr(j);
-		ft_putchar(' ');
+		// ft_putnbr(j);
+		// ft_putchar(' ');
 		gpath = gpath_head;
 		while(gpath)
 		{
 			run_ants(gpath->nb_ants, gpath->path_head->next);
 			if (gpath->nb_ants)
 			{
-				// ft_putnbr(gpath->nb_ants);
-				// ft_putchar(' ');
 				gpath->path_head->next->ant = i;
 				gpath->nb_ants--;
 				i++;
@@ -126,6 +91,5 @@ void 		solution_format(t_gpath *gpath, int moves, int nb_ants)
 		j++;
 		ft_putchar('\n');
 	}
-	// show_gpaths(gpath_head);
 	
 }

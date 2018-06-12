@@ -12,6 +12,10 @@
 
 #include "lem_in.h"
 
+// CORRECTIONS
+//---------------
+// duplicate pipe
+
 static t_gpath  	*init_gpath(t_path *path, int i)
 {
 	t_gpath 	*gpath;
@@ -35,6 +39,9 @@ static t_adjlist	*init_alist()
 	alist->nb_room = 0;
 	alist->start = NULL;
 	alist->end = NULL;
+	alist->info_i = 0;
+	// alist->info = (char *)malloc(sizeof(char));
+	alist->info = NULL;
 	return(alist);
 }
 
@@ -48,10 +55,12 @@ int 				main()
 	adjlist = init_alist();
 	if (!get_data(adjlist))
 	{
-		free(adjlist);
+		free_adjlist(adjlist);
 		return (ft_str_error("ERROR\n", 1));
 	}
-	// print_graph(adjlist);
+	ft_putendl(adjlist->info);
+	print_graph(adjlist);
+	ft_putchar('\n');
 	if (!(prev_list = breath_first_search(adjlist->start)))
 	{
 		ft_putendl("No paths");
@@ -67,7 +76,11 @@ int 				main()
 		path = create_path(prev_list);
 		add_2_gpath(gpath, path);
 	}
-	// show_gpaths(gpath);
 	show_answer(adjlist, gpath);
+	free_adjlist(adjlist);
+	free_map(gpath);
+
+	// ft_putchar('\n');
+
 	return (0);
 }

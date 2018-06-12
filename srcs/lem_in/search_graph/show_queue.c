@@ -33,7 +33,8 @@ void			show_prev_list(t_prev *prev_list)
 	while(prev_list)
 	{
 		ft_putendl(prev_list->current);
-		prev_list = find_previous(prev_list->previous, tail);
+		// prev_list = find_previous(prev_list->previous, tail);
+		prev_list = prev_list->prev;
 	}
 }
 

@@ -60,7 +60,7 @@ int			add_connection(char *line, t_adjlist *alist)
 	char	**tab;
 	
 	if (line_type(line, '#') == 1)
-		return (0);
+		return (1);
 	if (line_type(line, '-') != 1)
 	{
 		ft_putstr("Error link");
@@ -69,14 +69,16 @@ int			add_connection(char *line, t_adjlist *alist)
 	tab = ft_strsplit(line, '-'); //si tengo un argumento? hacer un checker mejor
 	if (!goto_alist(tab[0], tab[1], alist->start, alist))
 	{
+		free_tab(tab);
 		ft_putstr("non existing connection");
 		return (0);
 	}
 	if (!goto_alist(tab[1], tab[0], alist->start, alist))
 	{
+		free_tab(tab);
 		ft_putstr("non existing connection");
 		return (0);
 	}
-	free(tab); //free de lo que esta dentro del tab tambien//free_split
+	free_tab(tab); //free de lo que esta dentro del tab tambien//free_split
 	return (1);
 }

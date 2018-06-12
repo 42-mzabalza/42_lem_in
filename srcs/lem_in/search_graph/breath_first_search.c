@@ -17,7 +17,6 @@ static int		explore_neigh(t_stack **q_head, t_stack **q_tail, t_prev **prev, t_g
 	t_node *neighbors;
 
 	neighbors = (*q_head)->glist->head->next;
-	// show_nodes(neighbors);
 	while (neighbors)
 	{
 		if (!(*(neighbors->passed)))
@@ -66,15 +65,23 @@ t_prev			*breath_first_search(t_glist *glist_start)
 	previous = init_previous(find_start(glist_start));
 	queue_tail = init_queue(find_start(glist_start));
 	queue_head = queue_tail;
-	// show_queue(queue_head);
-	// show_prev_list(previous);
 	while (queue_head->glist->head->pos != 2)
 	{
 		rtn = explore_neigh(&queue_head, &queue_tail, &previous, glist_start);
 		if (rtn == 1)
+		{
+			free_queue(queue_head);
 			return (previous);
+		}
 		else if (rtn == -1)
+		{
+			free_prev_list(previous);
+			free_queue(queue_head);
 			return(NULL);
+		}
 	}
+	// ft_putendl("asfasf");
+	// show_prev_list(previous);
+	free_queue(queue_head);
 	return (previous);
 }

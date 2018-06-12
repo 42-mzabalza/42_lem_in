@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mzabalza <mzabalza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:08:06 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/04/17 13:08:35 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/12 14:00:23 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 ** pos 2 end
 ** pos 0 other
 */
+
+// typedef struct 		s_info
+// {
+// 	char 			**input_lines;
+// 	int 			iLine;
+// }					t_info
 
 typedef struct 		s_node
 {
@@ -44,6 +50,8 @@ typedef struct 		s_glist
 
 typedef struct 		s_adjlist
 {
+	char			*info;
+	int 			info_i;
 	int 			st_end;
 	int				nb_room;
 	int				nb_ant;
@@ -54,7 +62,7 @@ typedef struct 		s_adjlist
 typedef struct  	s_path
 {
 	char			*id;
-	int 			ant; //quitar
+	int 			ant;
 	struct s_path	*next;
 	struct s_path	*prev;
 }					t_path;
@@ -91,8 +99,10 @@ t_glist			*find_start(t_glist *glist);
 /*
 **----------  PARSING + MAP GENERATION  ---------------------------------------
 */
+
+char 			*new_info_line(char *info, char *line);
 int 			get_data(t_adjlist *adjlist);
-int				get_nb_ants();
+int				get_nb_ants(t_adjlist *adjlist);
 int				line_type(char *line, char c);
 int				get_nb_ants();
 void			skip_comment(char **line);
@@ -100,7 +110,7 @@ int 			is_integer(char *str);
 t_adjlist		*init_adjlist();
 t_node 			*init_node();
 void			add_glist(t_node *node, t_adjlist *alist);
-void			add_node(char *room, t_glist *list, t_adjlist *alist);
+int				add_node(char *room, t_glist *glist, t_adjlist *alist);
 int				add_connection(char *line, t_adjlist *alist);
 
 /*
@@ -120,6 +130,7 @@ char			*find_free_node(t_node *node);
 t_path			*init_path(char *start);
 t_path			*rm_node_from_path(t_path *path);
 void 			add_2_gpath(t_gpath *gpath, t_path *path);
+
 /*
 **----------  SHOW   --------------------------------------------------
 */
@@ -132,6 +143,18 @@ void			show_queue(t_stack *queue_head);
 void			show_answer(t_adjlist *alist, t_gpath *gpath);
 void			show_gpaths(t_gpath *gpath);
 void 			solution_format(t_gpath *gpath, int moves, int nb_ants);
+
+/*
+**----------  FREE   --------------------------------------------------
+*/
+
+void			free_adjlist(t_adjlist *adjlist);
+void			free_glist(t_glist *glist);
+void			free_node(t_node *node);
+void			free_tab(char **tab);
+void			free_map(t_gpath 	*gpath);
+void 			free_queue(t_stack	*queue_head);
+void			free_prev_list(t_prev *tail);
 
 
 
