@@ -80,8 +80,6 @@ t_prev			*breath_first_search(t_glist *glist_start)
 			return(NULL);
 		}
 	}
-	// ft_putendl("asfasf");
-	// show_prev_list(previous);
 	free_queue(queue_head);
 	return (previous);
 }

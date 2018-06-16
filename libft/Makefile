@@ -86,7 +86,8 @@ SRC = ft_abs.c\
 	ft_tolower.c\
 	ft_toupper.c\
 	ft_str_error.c\
-	ft_nb_words.c
+	ft_nb_words.c\
+	ft_options.c
 
 
 OBJ = $(SRC:.c=.o)

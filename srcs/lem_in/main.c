@@ -14,7 +14,25 @@
 
 // CORRECTIONS
 //---------------
+// nombre nodo ya existe
+// coordenadas ya existen
 // duplicate pipe
+// Error No paths, no mostrar el input map
+
+t_node 			*init_node()
+{
+	t_node 	*node;
+
+	if (!(node = (t_node *)malloc(sizeof(t_node))))
+		exit(1);
+	node->id = NULL;
+	node->pos = 0;
+	node->passed = (int *)malloc(sizeof(int)); //es necesario?
+	*(node->passed) = 0;
+	node->occupied = (int *)malloc(sizeof(int)); //es necesario?
+	*(node->occupied) = 0;
+	return (node);
+}
 
 static t_gpath  	*init_gpath(t_path *path, int i)
 {
@@ -39,33 +57,25 @@ static t_adjlist	*init_alist()
 	alist->nb_room = 0;
 	alist->start = NULL;
 	alist->end = NULL;
-	alist->info_i = 0;
-	// alist->info = (char *)malloc(sizeof(char));
+	alist->info_i = 1;
 	alist->info = NULL;
 	return(alist);
 }
 
-int 				main()
+int 				main(int ac, char **av)
 {
 	t_adjlist 	*adjlist;
 	t_path		*path;
 	t_gpath 	*gpath;
 	t_prev		*prev_list;
 
+
+	ft_putnbr(ft_options(ac, av));
 	adjlist = init_alist();
 	if (!get_data(adjlist))
-	{
-		free_adjlist(adjlist);
-		return (ft_str_error("ERROR\n", 1));
-	}
-	ft_putendl(adjlist->info);
-	print_graph(adjlist);
-	ft_putchar('\n');
+		return (free_alist_error(adjlist, NULL, 1, NULL));
 	if (!(prev_list = breath_first_search(adjlist->start)))
-	{
-		ft_putendl("No paths");
-		return (0);
-	}
+		return (free_alist_error(adjlist, NULL, 1, "Error: No paths founded"));
 	path = create_path(prev_list);
 	gpath = init_gpath(path, 0);
 	while(1 && path->ant > 2)
@@ -76,11 +86,5 @@ int 				main()
 		path = create_path(prev_list);
 		add_2_gpath(gpath, path);
 	}
-	show_answer(adjlist, gpath);
-	free_adjlist(adjlist);
-	free_map(gpath);
-
-	// ft_putchar('\n');
-
-	return (0);
+	return (free_alist_error(adjlist, gpath, 0, NULL));
 }

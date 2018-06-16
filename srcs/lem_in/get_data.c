@@ -12,20 +12,27 @@
 
 #include "lem_in.h"
 
-t_node 			*init_node()
+static int	check_start_end(char **line, int *flag, t_adjlist *adjlist, t_node *node)
 {
-	t_node 	*node;
-
-	if (!(node = (t_node *)malloc(sizeof(t_node))))
-		exit(1);
-	node->id = NULL;
-	node->pos = 0;
-	node->passed = (int *)malloc(sizeof(int)); //es necesario?
-	*(node->passed) = 0;
-	node->occupied = (int *)malloc(sizeof(int)); //es necesario?
-	*(node->occupied) = 0;
-	return (node);
+	*flag = 0;
+	if (!ft_strcmp(*line, "##start") || !ft_strcmp(*line, "##end"))
+	{
+		*flag = 1;
+		node->pos = 2;
+		(adjlist->st_end) += 2;
+		if (!ft_strcmp(*line, "##start"))
+		{
+			*(node->passed) = 1;
+			node->pos = 1;
+			(adjlist->st_end)++;
+		}
+		new_info_line(adjlist, *line);
+		if (!(get_next_line(0, &(*line)) > 0))
+			return (0);
+	}
+	return (1);
 }
+
 
 int		line_type(char *line, char c)
 {
@@ -76,47 +83,20 @@ static int	get_node(char **line, t_adjlist *adjlist)
 	t_node 	*node;
 	int 	flag;
 
-	flag = 0;
 	node = init_node();
-	if (!ft_strcmp(*line, "##start") || !ft_strcmp(*line, "##end"))
-	{
-		flag = 1;
-		node->pos = 2;
-		(adjlist->st_end) += 2;
-		if (!ft_strcmp(*line, "##start"))
-		{
-			*(node->passed) = 1;
-			node->pos = 1;
-			(adjlist->st_end)++;
-		}
-		adjlist->info = new_info_line(adjlist->info, *line);
-		free(*line);
-		get_next_line(0, &(*line)); // problema si no tiene if > 0??
-	}
+	if (!check_start_end(line, &flag, adjlist, node))
+		return(free_error(*line, node, 0)); //liberar node y line
 	if ((*line[0]) == '#' && !flag)
-	{
-		free_node(node);
-		return (1);
-	}
+		return (free_error(NULL, node, 1));
 	else
 		skip_comment(line);
 	if (*line && line_type(*line, ' ') == 2)
 	{
 		if (!get_room(node, *line))
-		{
-			free_node(node);
-			free(*line);
-			ft_putstr("ROOM input Error");
-			return (0);
-		}
+			return(free_error(*line, node, 0));
 	}
 	else
-	{
-		free_node(node);
-		free(*line);
-		ft_putstr("Room input Error");
-		return (0);
-	}
+		return(free_error(*line, node, 0));
 	add_glist(node, adjlist);
 	return (1);
 }
@@ -124,46 +104,26 @@ static int	get_node(char **line, t_adjlist *adjlist)
 int 			get_data(t_adjlist *adjlist)
 {
 	char	*line;
-	int 	i;
 	int     j;
 
 	if (!(adjlist->nb_ant = get_nb_ants(adjlist)))
-		return (ft_str_error("Ant input error\n", 0));
+		return (0);
 	while ((j = get_next_line(0, &line)) > 0 && (line_type(line, '-') == 0))
 	{
 		if (!get_node(&line, adjlist))
 			return (0);
-		adjlist->info = new_info_line(adjlist->info, line);
-		free(line);
+		new_info_line(adjlist, line);
 	}
 	if (adjlist->st_end != 5)
-	{
-		free(line);
-		return (ft_str_error("No start end problem\n", 0));
-	}
+		return(free_error(line, NULL, 0));
 	if (!j || !add_connection(line, adjlist))
-	{
-		free(line); //parece que no hace falta
-		return (0);
-	}
-	// if (!add_connection(line, adjlist))
-	// {
-	// 	free(line);
-	// 	return (0);
-	// }
-	i = 0;
-	adjlist->info = new_info_line(adjlist->info, line);
-	free(line);
+		return(free_error(line, NULL, 0));
+	new_info_line(adjlist, line);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!add_connection(line, adjlist))
-		{
-			free(line);
-			print_graph(adjlist);
-			return (0);
-		}
-		adjlist->info = new_info_line(adjlist->info, line);
-		free(line);
+			return(free_error(line, NULL, 0));
+		new_info_line(adjlist, line);
 	}
 	return (1);
 }

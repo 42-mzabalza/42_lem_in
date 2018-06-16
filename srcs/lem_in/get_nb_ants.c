@@ -28,6 +28,9 @@ int			get_nb_ants(t_adjlist *adjlist)
 		}
 		nb_ants = ft_atoi(line);
 		free(line);
+		if (!nb_ants)
+			return (0);
 	}
+	adjlist->info_i++;
 	return (nb_ants);
 }

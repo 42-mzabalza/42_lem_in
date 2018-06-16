@@ -100,7 +100,7 @@ t_glist			*find_start(t_glist *glist);
 **----------  PARSING + MAP GENERATION  ---------------------------------------
 */
 
-char 			*new_info_line(char *info, char *line);
+void 			new_info_line(t_adjlist *adjlist, char *line);
 int 			get_data(t_adjlist *adjlist);
 int				get_nb_ants(t_adjlist *adjlist);
 int				line_type(char *line, char c);
@@ -155,6 +155,8 @@ void			free_tab(char **tab);
 void			free_map(t_gpath 	*gpath);
 void 			free_queue(t_stack	*queue_head);
 void			free_prev_list(t_prev *tail);
+int 			free_error(char *line, t_node *node, int outInt);
+int 			free_alist_error(t_adjlist *alist, t_gpath 	*gpath, int out, char *str);
 
 
 

@@ -43,7 +43,8 @@ LEM_SRC = srcs/lem_in/main.c\
 	srcs/lem_in/is_integer.c\
 	srcs/lem_in/solution_format.c\
 	srcs/lem_in/ft_free.c\
-	srcs/lem_in/new_info_line.c
+	srcs/lem_in/new_info_line.c\
+	srcs/lem_in/free_error.c
 
 LEM_OBJ = $(LEM_SRC:.c=.o)
 
