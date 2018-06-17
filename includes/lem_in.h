@@ -50,6 +50,7 @@ typedef struct 		s_glist
 
 typedef struct 		s_adjlist
 {
+	int 			flags;
 	char			*info;
 	int 			info_i;
 	int 			st_end;
@@ -100,7 +101,7 @@ t_glist			*find_start(t_glist *glist);
 **----------  PARSING + MAP GENERATION  ---------------------------------------
 */
 
-void 			new_info_line(t_adjlist *adjlist, char *line);
+int 			new_info_line(t_adjlist *adjlist, char *line);
 int 			get_data(t_adjlist *adjlist);
 int				get_nb_ants(t_adjlist *adjlist);
 int				line_type(char *line, char c);

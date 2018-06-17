@@ -21,10 +21,10 @@
 
 t_node 			*init_node()
 {
-	t_node 	*node;
+	t_node *node;
 
 	if (!(node = (t_node *)malloc(sizeof(t_node))))
-		exit(1);
+		return (NULL);
 	node->id = NULL;
 	node->pos = 0;
 	node->passed = (int *)malloc(sizeof(int)); //es necesario?
@@ -36,9 +36,10 @@ t_node 			*init_node()
 
 static t_gpath  	*init_gpath(t_path *path, int i)
 {
-	t_gpath 	*gpath;
+	t_gpath *gpath;
 
-	gpath = (t_gpath *)malloc(sizeof(t_gpath));
+	if (!(gpath = (t_gpath *)malloc(sizeof(t_gpath)))) //malloc
+		return (NULL);
 	if (!i)
 		gpath->prev = NULL;
 	gpath->next = NULL;
@@ -50,15 +51,17 @@ static t_gpath  	*init_gpath(t_path *path, int i)
 
 static t_adjlist	*init_alist()
 {
-	t_adjlist 	*alist;
+	t_adjlist *alist;
 
-	alist = (t_adjlist *)malloc(sizeof(t_adjlist));
+	if (!(alist = (t_adjlist *)malloc(sizeof(t_adjlist)))) //malloc
+		return (NULL);
 	alist->st_end = 0;
 	alist->nb_room = 0;
 	alist->start = NULL;
 	alist->end = NULL;
 	alist->info_i = 1;
 	alist->info = NULL;
+	alist->flags = 0;
 	return(alist);
 }
 
@@ -69,15 +72,15 @@ int 				main(int ac, char **av)
 	t_gpath 	*gpath;
 	t_prev		*prev_list;
 
-
-	ft_putnbr(ft_options(ac, av));
 	adjlist = init_alist();
+	adjlist->flags = ft_options(ac, av);
 	if (!get_data(adjlist))
 		return (free_alist_error(adjlist, NULL, 1, NULL));
 	if (!(prev_list = breath_first_search(adjlist->start)))
-		return (free_alist_error(adjlist, NULL, 1, "Error: No paths founded"));
+		return (free_alist_error(adjlist, NULL, 1, ": No paths founded"));
 	path = create_path(prev_list);
-	gpath = init_gpath(path, 0);
+	if (!(gpath = init_gpath(path, 0)))
+		return (free_alist_error(adjlist, NULL, 1, ": malloc failed"));
 	while(1 && path->ant > 2)
 	{
 		reset_map(adjlist->start, gpath);

@@ -14,8 +14,6 @@
 
 int 	free_alist_error(t_adjlist *alist, t_gpath 	*gpath, int out, char *str)
 {
-	int line;
-
 	if (!out)
 	{
 		ft_putendl(alist->info);
@@ -24,14 +22,18 @@ int 	free_alist_error(t_adjlist *alist, t_gpath 	*gpath, int out, char *str)
 	}
 	else
 	{
-		if (!str)
+		ft_putstr("ERROR");
+		if (alist->flags & (1 << ('e' - 'a')))
 		{
-			ft_putstr("ERROR: line ");
-			ft_putnbr(alist->info_i);
-			ft_putchar('\n');
+			if (!str)
+			{
+				ft_putstr(": line ");
+				ft_putnbr(alist->info_i);
+			}
+			else
+				ft_putstr(str);
 		}
-		else
-			ft_putendl(str);
+		ft_putchar('\n');
 	}
 	if (alist)
 		free_adjlist(alist);

@@ -53,26 +53,21 @@ int		line_type(char *line, char c)
 static int 	get_room(t_node *node, char *line)
 {
 	char **rm;
-	int i;
 	int flag;
 
 	flag = 0;
+	rm = NULL;
 	if (ft_nb_words(line, ' ') != 3)
 		return (0);
 	if ((rm = ft_strsplit(line, ' ')) && is_integer(rm[1]) && is_integer(rm[2]))
 	{
-		node->id = ft_strdup(rm[0]);
+		if (!(node->id = ft_strdup(rm[0])))
+			return (0);
 		node->x = ft_atoi(rm[1]);
 		node->y = ft_atoi(rm[2]);
 		flag = 1;
 	}
-	i = 0;
-	while (rm[i])
-	{
-		free(rm[i]);
-		i++;
-	}
-	free(rm);
+	free_tab(rm);
 	if (!flag)
 		return (0);
 	return (1);
@@ -83,7 +78,8 @@ static int	get_node(char **line, t_adjlist *adjlist)
 	t_node 	*node;
 	int 	flag;
 
-	node = init_node();
+	if (!(node = init_node()))
+		return(free_error(*line, NULL, 0));
 	if (!check_start_end(line, &flag, adjlist, node))
 		return(free_error(*line, node, 0)); //liberar node y line
 	if ((*line[0]) == '#' && !flag)
@@ -118,7 +114,7 @@ int 			get_data(t_adjlist *adjlist)
 		return(free_error(line, NULL, 0));
 	if (!j || !add_connection(line, adjlist))
 		return(free_error(line, NULL, 0));
-	new_info_line(adjlist, line);
+	new_info_line(adjlist, line); //NEW INFO ERROR
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!add_connection(line, adjlist))

@@ -71,13 +71,12 @@ int		add_node(char *room, t_glist *glist, t_adjlist *alist)
 
 	if (!(tmp_glist = pointer_2_glist(room, alist->start)))
 		return (0);
-	node = init_node();
+	if (!(node = init_node()))
+		return (0);
 	free(node->passed);
 	free(node->occupied);
-	// if (!(node->id = ft_strdup(room)))
-		// exit (1);
-	node->id = ft_strdup(room); //podria pasarle el puntero de tmp_glist->head->id
-	// tmp_glist = pointer_2_glist(room, alist->start);
+	if (!(node->id = ft_strdup(room)))
+		return (0);
 	node->passed = tmp_glist->head->passed;
 	node->occupied = tmp_glist->head->occupied;
 	node->x = tmp_glist->head->x;

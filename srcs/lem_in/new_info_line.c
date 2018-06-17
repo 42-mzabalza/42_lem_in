@@ -12,17 +12,22 @@
 
 #include "lem_in.h"
 
-void 	new_info_line(t_adjlist *adjlist, char *line)
+int 	new_info_line(t_adjlist *adjlist, char *line)
 {
 	char *tmp;
 
 	tmp = adjlist->info;
-	adjlist->info = ft_strjoin(adjlist->info, "\n");
+	if (!(adjlist->info = ft_strjoin(adjlist->info, "\n")))
+		return (0);
 	free(tmp);
 	tmp = adjlist->info;
-	adjlist->info = ft_strjoin(adjlist->info, line);
+	if (!(adjlist->info = NULL))
+	{
+		line = NULL;
+		return (0);
+	}
 	free(tmp);
 	adjlist->info_i++;
 	free(line);
+	return (1);
 }
-

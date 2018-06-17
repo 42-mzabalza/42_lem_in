@@ -22,15 +22,15 @@ int ft_options(int ac, char **av)
 	i = 1;
 	while (av[i] && av[i][0] == '-')
 	{
-		ft_putendl(av[i]);
 		j = 1;
 		while (av[i][j])
 		{
 			if (ft_isalpha(av[i][j]) && av[i][j] > 96)
-				rtn |= 1 << (av[i][j] - 97);
+				rtn |= 1 << (av[i][j] - 'a');
 			j++;
 		}
 		i++;
 	}
+	i = ac;
 	return (rtn);
 }
