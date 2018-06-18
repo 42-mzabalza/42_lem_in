@@ -53,7 +53,6 @@ int			goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist)
 	}
 	if (!i)
 		return (0);
-	// if (pointer_2_glist(tab1, )) si lo 
 	if (!add_node(tab1, tmp_list, alist))
 		return (0);
 	return (1);
@@ -71,12 +70,13 @@ int		add_node(char *room, t_glist *glist, t_adjlist *alist)
 
 	if (!(tmp_glist = pointer_2_glist(room, alist->start)))
 		return (0);
-	if (!(node = init_node()))
+	if (!(node = init_node(0)))
 		return (0);
-	free(node->passed);
-	free(node->occupied);
 	if (!(node->id = ft_strdup(room)))
+	{
+		free_node(node);
 		return (0);
+	}
 	node->passed = tmp_glist->head->passed;
 	node->occupied = tmp_glist->head->occupied;
 	node->x = tmp_glist->head->x;

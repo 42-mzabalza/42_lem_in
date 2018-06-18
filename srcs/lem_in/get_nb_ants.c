@@ -20,7 +20,11 @@ int			get_nb_ants(t_adjlist *adjlist)
 
 	if (get_next_line(0, &line) > 0)
 	{
-		adjlist->info = ft_strdup(line);
+		if (!(adjlist->info = ft_strdup(line)))
+		{
+			free(line);
+			return (0);
+		}
 		if (ft_isnum(line) != 1)
 		{
 			free(line);

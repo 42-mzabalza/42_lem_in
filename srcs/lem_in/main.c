@@ -19,7 +19,7 @@
 // duplicate pipe
 // Error No paths, no mostrar el input map
 
-t_node 			*init_node()
+t_node 			*init_node(int i)
 {
 	t_node *node;
 
@@ -27,10 +27,20 @@ t_node 			*init_node()
 		return (NULL);
 	node->id = NULL;
 	node->pos = 0;
-	node->passed = (int *)malloc(sizeof(int)); //es necesario?
-	*(node->passed) = 0;
-	node->occupied = (int *)malloc(sizeof(int)); //es necesario?
-	*(node->occupied) = 0;
+	if (i)
+	{
+		if (!(node->passed = (int *)malloc(sizeof(int))))
+			return (NULL);
+		*(node->passed) = 0;
+		if (!(node->occupied = (int *)malloc(sizeof(int))))
+			return (NULL);
+		*(node->occupied) = 0;
+	}
+	else
+	{
+		node->passed = NULL;
+		node->occupied = NULL;
+	}
 	return (node);
 }
 
@@ -38,7 +48,7 @@ static t_gpath  	*init_gpath(t_path *path, int i)
 {
 	t_gpath *gpath;
 
-	if (!(gpath = (t_gpath *)malloc(sizeof(t_gpath)))) //malloc
+	if (!(gpath = (t_gpath *)malloc(sizeof(t_gpath))))
 		return (NULL);
 	if (!i)
 		gpath->prev = NULL;
@@ -53,7 +63,7 @@ static t_adjlist	*init_alist()
 {
 	t_adjlist *alist;
 
-	if (!(alist = (t_adjlist *)malloc(sizeof(t_adjlist)))) //malloc
+	if (!(alist = (t_adjlist *)malloc(sizeof(t_adjlist))))
 		return (NULL);
 	alist->st_end = 0;
 	alist->nb_room = 0;
@@ -72,7 +82,8 @@ int 				main(int ac, char **av)
 	t_gpath 	*gpath;
 	t_prev		*prev_list;
 
-	adjlist = init_alist();
+	if (!(adjlist = init_alist()))
+		return (ft_str_error("ERROR\n", 1));
 	adjlist->flags = ft_options(ac, av);
 	if (!get_data(adjlist))
 		return (free_alist_error(adjlist, NULL, 1, NULL));

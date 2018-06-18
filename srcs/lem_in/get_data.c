@@ -50,7 +50,7 @@ int		line_type(char *line, char c)
 	return (count);
 }
 
-static int 	get_room(t_node *node, char *line)
+static int 	get_room(t_node *node, char *line, t_adjlist *alist)
 {
 	char **rm;
 	int flag;
@@ -68,6 +68,8 @@ static int 	get_room(t_node *node, char *line)
 		flag = 1;
 	}
 	free_tab(rm);
+	if (pointer_2_glist(node->id, alist->start))
+		return (0);
 	if (!flag)
 		return (0);
 	return (1);
@@ -78,22 +80,23 @@ static int	get_node(char **line, t_adjlist *adjlist)
 	t_node 	*node;
 	int 	flag;
 
-	if (!(node = init_node()))
+	if (!(node = init_node(1)))
 		return(free_error(*line, NULL, 0));
 	if (!check_start_end(line, &flag, adjlist, node))
-		return(free_error(*line, node, 0)); //liberar node y line
+		return(free_error(*line, node, 0));
 	if ((*line[0]) == '#' && !flag)
 		return (free_error(NULL, node, 1));
 	else
-		skip_comment(line);
+		skip_comment(adjlist, line);
 	if (*line && line_type(*line, ' ') == 2)
 	{
-		if (!get_room(node, *line))
+		if (!get_room(node, *line, adjlist))
 			return(free_error(*line, node, 0));
 	}
 	else
 		return(free_error(*line, node, 0));
-	add_glist(node, adjlist);
+	if (!add_glist(node, adjlist))
+		return(free_error(*line, node, 0));
 	return (1);
 }
 
@@ -106,20 +109,21 @@ int 			get_data(t_adjlist *adjlist)
 		return (0);
 	while ((j = get_next_line(0, &line)) > 0 && (line_type(line, '-') == 0))
 	{
-		if (!get_node(&line, adjlist))
+		if (!get_node(&line, adjlist) || !new_info_line(adjlist, line))
 			return (0);
-		new_info_line(adjlist, line);
 	}
 	if (adjlist->st_end != 5)
 		return(free_error(line, NULL, 0));
 	if (!j || !add_connection(line, adjlist))
 		return(free_error(line, NULL, 0));
-	new_info_line(adjlist, line); //NEW INFO ERROR
+	if (!new_info_line(adjlist, line))
+		return (0);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!add_connection(line, adjlist))
 			return(free_error(line, NULL, 0));
-		new_info_line(adjlist, line);
+		if (!new_info_line(adjlist, line))
+			return (0);
 	}
 	return (1);
 }

@@ -16,15 +16,24 @@ int 	new_info_line(t_adjlist *adjlist, char *line)
 {
 	char *tmp;
 
+	if (line[0] == '#' && ft_strcmp(line, "##start") && ft_strcmp(line, "##end"))
+	{
+		adjlist->info_i++;
+		free(line);
+		return (1);
+	}
 	tmp = adjlist->info;
 	if (!(adjlist->info = ft_strjoin(adjlist->info, "\n")))
-		return (0);
+	{
+		free(tmp);
+		return(free_error(line, NULL, 0));
+	}
 	free(tmp);
 	tmp = adjlist->info;
-	if (!(adjlist->info = NULL))
+	if (!(adjlist->info = ft_strjoin(adjlist->info, line)))
 	{
-		line = NULL;
-		return (0);
+		free(tmp);
+		return(free_error(line, NULL, 0));
 	}
 	free(tmp);
 	adjlist->info_i++;
