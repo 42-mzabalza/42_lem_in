@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 15:00:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/05/18 15:17:15 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:30:16 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_path		*create_path(t_prev *reverse_path)
 	path->next = NULL;
 	path->ant = 1;
 	reverse_path = find_previous(reverse_path->previous, tail);
-	while(reverse_path)
+	while (reverse_path)
 	{
 		path->prev = (t_path *)malloc(sizeof(t_path));
 		path->prev->next = path;
@@ -34,8 +34,8 @@ t_path		*create_path(t_prev *reverse_path)
 		path = path->prev;
 		path->ant = (path->next->ant) + 1;
 		path->id = reverse_path->current;
-		reverse_path = find_previous(reverse_path->previous, tail); //si empiezo a buscar desde donde estoy mejor
-	}	
+		reverse_path = find_previous(reverse_path->previous, tail);
+	}
 	free_prev_list(tail);
 	return (path);
 }

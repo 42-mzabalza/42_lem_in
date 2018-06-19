@@ -6,20 +6,13 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:07:21 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/04/17 13:17:08 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:17:46 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-// CORRECTIONS
-//---------------
-// nombre nodo ya existe
-// coordenadas ya existen
-// duplicate pipe
-// Error No paths, no mostrar el input map
-
-t_node 			*init_node(int i)
+t_node				*init_node(int i)
 {
 	t_node *node;
 
@@ -44,7 +37,7 @@ t_node 			*init_node(int i)
 	return (node);
 }
 
-static t_gpath  	*init_gpath(t_path *path, int i)
+static t_gpath		*init_gpath(t_path *path, int i)
 {
 	t_gpath *gpath;
 
@@ -56,10 +49,10 @@ static t_gpath  	*init_gpath(t_path *path, int i)
 	gpath->path_head = path;
 	gpath->nb_ants = 0;
 	gpath->nb_nodes = path->ant;
-	return(gpath);
+	return (gpath);
 }
 
-static t_adjlist	*init_alist()
+static t_adjlist	*init_alist(void)
 {
 	t_adjlist *alist;
 
@@ -72,14 +65,14 @@ static t_adjlist	*init_alist()
 	alist->info_i = 1;
 	alist->info = NULL;
 	alist->flags = 0;
-	return(alist);
+	return (alist);
 }
 
-int 				main(int ac, char **av)
+int					main(int ac, char **av)
 {
-	t_adjlist 	*adjlist;
+	t_adjlist	*adjlist;
 	t_path		*path;
-	t_gpath 	*gpath;
+	t_gpath		*gpath;
 	t_prev		*prev_list;
 
 	if (!(adjlist = init_alist()))
@@ -92,7 +85,7 @@ int 				main(int ac, char **av)
 	path = create_path(prev_list);
 	if (!(gpath = init_gpath(path, 0)))
 		return (free_alist_error(adjlist, NULL, 1, ": malloc failed"));
-	while(1 && path->ant > 2)
+	while (1 && path->ant > 2)
 	{
 		reset_map(adjlist->start, gpath);
 		if (!(prev_list = breath_first_search(adjlist->start)))

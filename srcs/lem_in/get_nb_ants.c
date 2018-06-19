@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 14:56:47 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/05/23 14:56:49 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/19 20:27:07 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			get_nb_ants(t_adjlist *adjlist)
 {
 	char	*line;
-	int 	i;
+	int		i;
 	int		nb_ants;
 
 	if (get_next_line(0, &line) > 0)

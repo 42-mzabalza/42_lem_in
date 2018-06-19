@@ -6,37 +6,37 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 15:58:11 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/06/12 15:58:14 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:06:00 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int 	new_info_line(t_adjlist *adjlist, char *line)
+int		new_info_line(t_adjlist *adjlist, char *lne)
 {
 	char *tmp;
 
-	if (line[0] == '#' && ft_strcmp(line, "##start") && ft_strcmp(line, "##end"))
+	if (lne[0] == '#' && ft_strcmp(lne, "##start") && ft_strcmp(lne, "##end"))
 	{
 		adjlist->info_i++;
-		free(line);
+		free(lne);
 		return (1);
 	}
 	tmp = adjlist->info;
 	if (!(adjlist->info = ft_strjoin(adjlist->info, "\n")))
 	{
 		free(tmp);
-		return(free_error(line, NULL, 0));
+		return (free_error(lne, NULL, 0));
 	}
 	free(tmp);
 	tmp = adjlist->info;
-	if (!(adjlist->info = ft_strjoin(adjlist->info, line)))
+	if (!(adjlist->info = ft_strjoin(adjlist->info, lne)))
 	{
 		free(tmp);
-		return(free_error(line, NULL, 0));
+		return (free_error(lne, NULL, 0));
 	}
 	free(tmp);
 	adjlist->info_i++;
-	free(line);
+	free(lne);
 	return (1);
 }

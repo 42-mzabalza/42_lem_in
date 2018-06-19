@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 11:12:16 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/05/18 11:12:58 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:31:27 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_prev	*find_previous(char *id, t_prev *tail)
 {
 	if (!id)
 		return (NULL);
-	while(tail)
+	while (tail)
 	{
 		if (!ft_strcmp(tail->current, id))
 			return (tail);
@@ -25,27 +25,25 @@ t_prev	*find_previous(char *id, t_prev *tail)
 	return (NULL);
 }
 
-void			show_prev_list(t_prev *prev_list)
+void	show_prev_list(t_prev *prev_list)
 {
 	t_prev	*tail;
 
 	tail = prev_list;
-	while(prev_list)
+	while (prev_list)
 	{
 		ft_putendl(prev_list->current);
-		// prev_list = find_previous(prev_list->previous, tail);
 		prev_list = prev_list->prev;
 	}
 }
 
-void		show_queue(t_stack *queue_head)
+void	show_queue(t_stack *queue_head)
 {
 	ft_putendl("-----queue start-----");
-	while(queue_head)
+	while (queue_head)
 	{
 		ft_putendl(queue_head->glist->head->id);
 		queue_head = queue_head->next;
 	}
 	ft_putendl("-----queue end-----");
-
 }

@@ -6,22 +6,22 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 14:56:38 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/05/18 15:00:41 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:28:08 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int 		is_in_path(char *id_room, t_gpath *gpath)
+static int		is_in_path(char *id_room, t_gpath *gpath)
 {
 	t_path *tmp;
 
-	while(gpath)
+	while (gpath)
 	{
 		tmp = gpath->path_head;
 		while (tmp)
 		{
-			if (!ft_strcmp(tmp->id, id_room)) //mirar mi ft_strcmp!!!!
+			if (!ft_strcmp(tmp->id, id_room))
 				return (1);
 			tmp = tmp->next;
 		}
@@ -40,4 +40,4 @@ void			reset_map(t_glist *glist_start, t_gpath *gpath)
 			*(glist_start->head->passed) = 0;
 		glist_start = glist_start->next;
 	}
-}	
+}

@@ -36,7 +36,7 @@ static char		*ft_fill_line(char *chaume, char **line)
 	while (chaume[len] != '\n')
 		len++;
 	*line = ft_strsub(chaume, 0, len);
-	tmp = chaume + len + 1;
+	tmp = chaume + (len + 1);
 	tmp = ft_strdup(tmp);
 	ft_strdel(&chaume);
 	return (tmp);

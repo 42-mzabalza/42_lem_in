@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:17:30 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/05/11 12:17:35 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:34:30 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			show_nodes(t_node *node)
 
 	i = 1;
 	ft_putendl("******");
-	while(node)
+	while (node)
 	{
 		ft_putnbr(i);
 		ft_putchar(' ');
@@ -34,7 +34,7 @@ void			show_nodes(t_node *node)
 
 void			show_gpaths(t_gpath *gpath)
 {
-	while(gpath)
+	while (gpath)
 	{
 		ft_putstr("nb of nodes: ");
 		ft_putnbr(gpath->nb_nodes);
@@ -49,7 +49,7 @@ void			show_gpaths(t_gpath *gpath)
 void			show_path(t_path *path)
 {
 	ft_putendl("------");
-	while(path)
+	while (path)
 	{
 		ft_putnbr(path->ant);
 		ft_putchar(' ');

@@ -6,13 +6,13 @@
 /*   By: mzabalza <mzabalza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 13:14:39 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/06/12 13:58:43 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 20:57:54 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_glist 	*pointer_2_glist(char *id_room, t_glist *tmp_glist)
+t_glist	*pointer_2_glist(char *id_room, t_glist *tmp_glist)
 {
 	int i;
 
@@ -21,7 +21,7 @@ t_glist 	*pointer_2_glist(char *id_room, t_glist *tmp_glist)
 	i = 0;
 	while (tmp_glist)
 	{
-		if (!ft_strcmp(tmp_glist->head->id, id_room)) //mirar mi ft_strcmp!!!!
+		if (!ft_strcmp(tmp_glist->head->id, id_room))
 		{
 			i++;
 			break ;
@@ -34,10 +34,11 @@ t_glist 	*pointer_2_glist(char *id_room, t_glist *tmp_glist)
 }
 
 /*
-** findst the room tab0 in the alist, calls add node to add tab1 in that position
+** findst the room tab0 in the alist,
+** calls add node to add tab1 in that position
 */
 
-int			goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist)
+int		goto_alist(char *tab0, char *tab1, t_glist *tmp_list, t_adjlist *alist)
 {
 	int i;
 

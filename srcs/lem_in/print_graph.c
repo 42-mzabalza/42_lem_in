@@ -6,13 +6,13 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:17:13 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/04/17 13:17:27 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:06:55 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	print_list(t_glist *list)
+static void		print_list(t_glist *list)
 {
 	t_node *tmp;
 
@@ -30,9 +30,10 @@ static void	print_list(t_glist *list)
 	}
 }
 
-void		print_graph(t_adjlist *adjlist)
+void			print_graph(t_adjlist *adjlist)
 {
 	t_glist *tmp;
+
 	ft_putendl("----map----");
 	ft_putstr("number of ants: ");
 	ft_putnbr(adjlist->nb_ant);
