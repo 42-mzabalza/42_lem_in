@@ -12,12 +12,13 @@
 
 #include "lem_in.h"
 
-void	skip_comment(t_adjlist *alist, char **line)
+int		skip_comment(t_adjlist *alist, char **line)
 {
 	while ((*line)[0] == '#')
 	{
-		alist->info_i++;
-		free(*line);
+		if (!new_info_line(alist, *line))
+			return (0);
 		get_next_line(0, &(*line));
 	}
+	return (1);
 }

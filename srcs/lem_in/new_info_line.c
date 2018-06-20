@@ -16,11 +16,12 @@ int		new_info_line(t_adjlist *adjlist, char *lne)
 {
 	char *tmp;
 
-	if (lne[0] == '#' && ft_strcmp(lne, "##start") && ft_strcmp(lne, "##end"))
+	if (!adjlist->info)
 	{
+		if (!(adjlist->info = ft_strdup(lne)))
+			return (free_error(lne, NULL, 0));
 		adjlist->info_i++;
-		free(lne);
-		return (1);
+		return (free_error(lne, NULL, 1));
 	}
 	tmp = adjlist->info;
 	if (!(adjlist->info = ft_strjoin(adjlist->info, "\n")))
@@ -37,6 +38,5 @@ int		new_info_line(t_adjlist *adjlist, char *lne)
 	}
 	free(tmp);
 	adjlist->info_i++;
-	free(lne);
-	return (1);
+	return (free_error(lne, NULL, 1));
 }

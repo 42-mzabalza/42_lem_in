@@ -6,13 +6,13 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/16 18:43:18 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/06/16 18:57:19 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/20 16:27:44 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_options(int ac, char **av)
+int		ft_options(int ac, char **av)
 {
 	int i;
 	int j;

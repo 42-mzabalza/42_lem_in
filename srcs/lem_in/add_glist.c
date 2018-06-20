@@ -52,6 +52,11 @@ int		add_connection(char *line, t_adjlist *alist)
 		return (0);
 	if (!(tab = ft_strsplit(line, '-')))
 		return (0);
+	if (!ft_strcmp(tab[0], tab[1]))
+	{
+		free_tab(tab);
+		return (0);
+	}
 	if (!goto_alist(tab[0], tab[1], alist->start, alist))
 	{
 		free_tab(tab);

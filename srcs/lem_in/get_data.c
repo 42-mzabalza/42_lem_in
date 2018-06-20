@@ -6,7 +6,7 @@
 /*   By: mzabalza <mzabalza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:16:40 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/06/18 21:12:04 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/06/20 22:19:11 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ static int	get_node(char **line, t_adjlist *adjlist)
 	if ((*line[0]) == '#' && !flag)
 		return (free_error(NULL, node, 1));
 	else
-		skip_comment(adjlist, line);
+	{
+		if (!skip_comment(adjlist, line))
+			return (free_error(NULL, node, 0));
+	}
 	if (*line && line_type(*line, ' ') == 2)
 	{
 		if (!get_room(node, *line, adjlist))
