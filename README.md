@@ -1,5 +1,6 @@
 # 42_lem_in
 
+## Introduction
 Lem-in is a finding shortest path problem. 
 The goal of this project is to find the quickest way to get n ants across the farm.
 Obviously, there are some basic constraints. To be the first to arrive, ants will need
@@ -15,3 +16,5 @@ as many ants as necessary.)
 • At each turn you can move each ant only once and through a tube (the room at
 the receiving end must be empty).
 • You must to display your results on the standard output in the following format:
+
+## Project Usage
