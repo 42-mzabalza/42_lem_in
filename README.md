@@ -28,19 +28,20 @@ the_links
 Lx-y Lz-w Lr-o ...
 ```
 
-Example 2 :
-[2]
+Example:
 
-/ | \
+     [2]
 
-[0] | [1]
+   /  |  \
 
-\ | /
+[0]   |   [1]
 
-[3]
+   \  |  /
+
+     [3]
 
 ```
-zaz@blackjack /tmp/lem-in $ ./lem-in < subjet2.map
+./lem-in < subjet2.map
 3
 2 5 0
 ##start
@@ -55,8 +56,7 @@ zaz@blackjack /tmp/lem-in $ ./lem-in < subjet2.map
 2-3
 L1-3 L2-2
 L1-1 L2-1 L3-3
-L3-1
-zaz@blackjack /tmp/lem-in $
+L3-1 
 ```
 ## Project Usage
 ```
