@@ -1,4 +1,4 @@
-# 42_lem_in
+# Lem-in
 
 ## Introduction
 Lem-in is a finding shortest path problem.
