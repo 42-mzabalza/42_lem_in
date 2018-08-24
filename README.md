@@ -1,4 +1,4 @@
-# Lem-in
+# lem-in
 
 ## Introduction
 Lem-in is a finding shortest path problem.
@@ -47,16 +47,16 @@ L1-1 L2-1 L3-3
 L3-1 
 ```
 The parsed input is displayed first, followed by the moves of the ant in each turn:
-- Turn 1 (L1-3 L2-2) -> Ant1 moves from room0(start) to room3, Ant2 moves from room0(start) to room2.
+- ##Turn 1 (L1-3 L2-2) -> Ant1 moves from room0(start) to room3, Ant2 moves from room0(start) to room2.
 - Turn 2 (L1-1 L2-1 L3-3) -> Ant1 moves from room3 to room1(end), Ant2 moves from room2 to room1(end), Ant3 moves from room0(start) to room3.
 - Turn 3 (L1-1 L2-1 L3-3) -> Ant3 moves from room3 to room1(end).
 
+## Instalation
+```
+git clone https://github.com/mzabalza/42_lem_in.git; cd 42_lem_in; make
+```
 
 ## Project Usage
 ```
-make
-```
-+ **PUSH SWAP**
-```
-./lem-in 4 5 3 1
+./lem-in < maps/big
 ```
