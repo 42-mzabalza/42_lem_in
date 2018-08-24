@@ -28,6 +28,32 @@ the_links
 Lx-y Lz-w Lr-o ...
 ```
 
+Example 2 :
+[2]
+/ | \
+[0] | [1]
+\ | /
+[3]
+
+```
+zaz@blackjack /tmp/lem-in $ ./lem-in < subjet2.map
+3
+2 5 0
+##start
+0 1 2
+##end
+1 9 2
+3 5 4
+0-2
+0-3
+2-1
+3-1
+2-3
+L1-3 L2-2
+L1-1 L2-1 L3-3
+L3-1
+zaz@blackjack /tmp/lem-in $
+```
 ## Project Usage
 ```
 make
