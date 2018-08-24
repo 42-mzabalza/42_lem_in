@@ -18,11 +18,20 @@ as many ants as necessary.)
 
 • At each turn the ants that moved will be displayed.
 
+• The program will receive the data describing the ant farm from the standard input
+in the following format:
+```
+number_of_ants
+the_rooms
+the_links
+```
+
 • The results will be displayed on the standard output in the following format:
 ```
 number_of_ants
 the_rooms
 the_links
+
 Lx-y Lz-w Lr-o ...
 ```
 
@@ -63,8 +72,20 @@ git clone https://github.com/mzabalza/42_lem_in.git; cd 42_lem_in; make
 
 # Technical Implementation
 this program was created without much help from standard libraries, these are all the standard function used:
-◦ malloc
-◦ free
-◦ read
-◦ write
-◦ exit
+- malloc
+- free
+- read
+- write
+- exit
+
+Farm structure: Adjacency list.
+
+## 1 Parsing
+First part of the programm is to parse the input map, provided from the standard input. The parsign includes checking the input is written in the propper way, while storing the nodes as a graph  in the same time. 
+## 2 Data structure: Adjacency list
+The structure of the farm will be an adjacency list where a main linked list will represent all the nodes and each node will have another linked list representing all other nodes linked to itself.
+## 3 Graph traversal: Breth first search (BFS)
+Once the farm is stored in the adjacency list, the method used for finding the shortes path is Breadth-first search (BFS).
+This way I find all the posible paths from start to end in order of shortes to largest.
+
+
