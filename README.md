@@ -1,4 +1,4 @@
-# lem-in
+# Lem-in
 
 ## Introduction
 Lem-in is a path finder tool.
